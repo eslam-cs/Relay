@@ -1,0 +1,157 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+*.classpath
+.project
+.settings/
+
+# Eclipse
+.settings/
+.classpath
+.project
+bin/
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+# Docker
+docker-compose.override.yml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build and test output
+**/target/
+**/bin/
+**/build/
+**/out/
+**/test-output/
+**/test-results/
+
+# IDE specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Local configuration
+application*.yml
+!application.yml
+!application-*.example.yml
+
+# Logs
+logs/
+*.log
+
+# temp files
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# Maven wrapper
+.mvn/
+
+# Mac OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Application specific
+*.db
+*.sql
+*.sqlite
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Docker Compose
+/docker-compose.override.yml
+
+# Test reports
+test-output/
+test-results/

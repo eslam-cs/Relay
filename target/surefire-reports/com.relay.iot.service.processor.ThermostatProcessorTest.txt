@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.relay.iot.service.processor.ThermostatProcessorTest
--------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s - in com.relay.iot.service.processor.ThermostatProcessorTest
