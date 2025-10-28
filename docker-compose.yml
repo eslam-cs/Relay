@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: iot-postgres
+    environment:
+      POSTGRES_DB: iot
+      POSTGRES_USER: iot
+      POSTGRES_PASSWORD: iot
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U iot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - iot-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iot-backend
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: iot
+      DB_USER: iot
+      DB_PASSWORD: iot
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - iot-network
+
+volumes:
+  postgres_data:
+
+networks:
+  iot-network:
+    driver: bridge

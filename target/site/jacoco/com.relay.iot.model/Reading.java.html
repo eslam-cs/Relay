@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Reading.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">iot-backend</a> &gt; <a href="index.source.html" class="el_package">com.relay.iot.model</a> &gt; <span class="el_source">Reading.java</span></div><h1>Reading.java</h1><pre class="source lang-java linenums">package com.relay.iot.model;
+
+import jakarta.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = &quot;readings&quot;, indexes = {
+    @Index(name = &quot;idx_sensor_timestamp&quot;, columnList = &quot;sensorId,timestamp&quot;),
+    @Index(name = &quot;idx_timestamp&quot;, columnList = &quot;timestamp&quot;)
+})
+public class Reading {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String sensorId;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private DeviceType deviceType;
+    
+    @Column(nullable = false)
+    private Double value;
+    
+    @Column(nullable = false)
+    private Instant timestamp;
+    
+<span class="fc" id="L30">    public Reading() {</span>
+<span class="fc" id="L31">    }</span>
+    
+<span class="nc" id="L33">    public Reading(String sensorId, DeviceType deviceType, Double value, Instant timestamp) {</span>
+<span class="nc" id="L34">        this.sensorId = sensorId;</span>
+<span class="nc" id="L35">        this.deviceType = deviceType;</span>
+<span class="nc" id="L36">        this.value = value;</span>
+<span class="nc" id="L37">        this.timestamp = timestamp;</span>
+<span class="nc" id="L38">    }</span>
+    
+    // Getters and Setters
+    public Long getId() {
+<span class="fc" id="L42">        return id;</span>
+    }
+    
+    public void setId(Long id) {
+<span class="fc" id="L46">        this.id = id;</span>
+<span class="fc" id="L47">    }</span>
+    
+    public String getSensorId() {
+<span class="fc" id="L50">        return sensorId;</span>
+    }
+    
+    public void setSensorId(String sensorId) {
+<span class="fc" id="L54">        this.sensorId = sensorId;</span>
+<span class="fc" id="L55">    }</span>
+    
+    public DeviceType getDeviceType() {
+<span class="fc" id="L58">        return deviceType;</span>
+    }
+    
+    public void setDeviceType(DeviceType deviceType) {
+<span class="fc" id="L62">        this.deviceType = deviceType;</span>
+<span class="fc" id="L63">    }</span>
+    
+    public Double getValue() {
+<span class="fc" id="L66">        return value;</span>
+    }
+    
+    public void setValue(Double value) {
+<span class="fc" id="L70">        this.value = value;</span>
+<span class="fc" id="L71">    }</span>
+    
+    public Instant getTimestamp() {
+<span class="fc" id="L74">        return timestamp;</span>
+    }
+    
+    public void setTimestamp(Instant timestamp) {
+<span class="fc" id="L78">        this.timestamp = timestamp;</span>
+<span class="fc" id="L79">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

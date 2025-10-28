@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SensorDataProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">iot-backend</a> &gt; <a href="index.source.html" class="el_package">com.relay.iot.service.processor</a> &gt; <span class="el_source">SensorDataProcessor.java</span></div><h1>SensorDataProcessor.java</h1><pre class="source lang-java linenums">package com.relay.iot.service.processor;
+
+import com.relay.iot.dto.AggregateStats;
+import com.relay.iot.model.DeviceType;
+import com.relay.iot.model.Reading;
+
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Interface for processing sensor-specific data
+ * Each device type can have its own implementation with custom logic
+ */
+public interface SensorDataProcessor {
+    
+    /**
+     * Get the device type this processor handles
+     */
+    DeviceType getDeviceType();
+    
+    /**
+     * Validate a reading before saving
+     * @return true if valid, false otherwise
+     */
+    boolean validateReading(Reading reading);
+    
+    /**
+     * Process/transform a reading before storage (optional)
+     * Can apply calibration, normalization, etc.
+     */
+    Reading processReading(Reading reading);
+    
+    /**
+     * Get the valid range for this sensor type
+     */
+    double getMinValue();
+    double getMaxValue();
+    
+    /**
+     * Default implementation for calculating aggregate statistics.
+     * 
+     * Computes average, median, min, max, and count from a list of readings.
+     * The calculation logic is identical across all sensor types.
+     * 
+     * Implementations can override this if custom aggregate logic is needed
+     * (e.g., adding device-specific metrics like heart rate zones, fuel consumption rate, etc.)
+     * 
+     * @param readings List of sensor readings
+     * @return AggregateStats containing computed statistics
+     */
+    default AggregateStats calculateAggregates(List&lt;Reading&gt; readings) {
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">        if (readings == null || readings.isEmpty()) {</span>
+<span class="fc" id="L53">            return new AggregateStats(null, null, null, null, 0L);</span>
+        }
+        
+<span class="fc" id="L56">        double sum = 0;</span>
+<span class="fc" id="L57">        double min = Double.MAX_VALUE;</span>
+<span class="fc" id="L58">        double max = Double.MIN_VALUE;</span>
+<span class="fc" id="L59">        List&lt;Double&gt; values = new java.util.ArrayList&lt;&gt;();</span>
+        
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (Reading reading : readings) {</span>
+<span class="fc" id="L62">            double value = reading.getValue();</span>
+<span class="fc" id="L63">            sum += value;</span>
+<span class="fc" id="L64">            min = Math.min(min, value);</span>
+<span class="fc" id="L65">            max = Math.max(max, value);</span>
+<span class="fc" id="L66">            values.add(value);</span>
+<span class="fc" id="L67">        }</span>
+        
+<span class="fc" id="L69">        double average = sum / readings.size();</span>
+<span class="fc" id="L70">        Double median = calculateMedian(values);</span>
+        
+<span class="fc" id="L72">        return new AggregateStats(average, median, min, max, (long) readings.size());</span>
+    }
+    
+    /**
+     * Default implementation for calculating median value.
+     * 
+     * Shared across all sensor types since the calculation logic is identical.
+     * The median is the middle value when the list is sorted:
+     * - For odd-sized lists: returns the middle element
+     * - For even-sized lists: returns the average of the two middle elements
+     * 
+     * Implementations can override this if custom median logic is needed.
+     * 
+     * @param values List of double values
+     * @return Median value, or null if list is empty
+     */
+    default Double calculateMedian(List&lt;Double&gt; values) {
+<span class="pc bpc" id="L89" title="2 of 4 branches missed.">        if (values == null || values.isEmpty()) {</span>
+<span class="nc" id="L90">            return null;</span>
+        }
+        
+        // Sort the values to find the middle
+<span class="fc" id="L94">        Collections.sort(values);</span>
+<span class="fc" id="L95">        int size = values.size();</span>
+        
+        // For even-sized lists, average the two middle values
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (size % 2 == 0) {</span>
+<span class="fc" id="L99">            return (values.get(size / 2 - 1) + values.get(size / 2)) / 2.0;</span>
+        } else {
+            // For odd-sized lists, return the middle value
+<span class="fc" id="L102">            return values.get(size / 2);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

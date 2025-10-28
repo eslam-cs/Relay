@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AggregateStats.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">iot-backend</a> &gt; <a href="index.source.html" class="el_package">com.relay.iot.dto</a> &gt; <span class="el_source">AggregateStats.java</span></div><h1>AggregateStats.java</h1><pre class="source lang-java linenums">package com.relay.iot.dto;
+
+/**
+ * Data Transfer Object for aggregate statistics.
+ * Used to return calculated statistics from the /stats endpoints.
+ * This is not a database entity - values are computed on-the-fly from Reading entities.
+ */
+public class AggregateStats {
+    private Double average;
+    private Double median;
+    private Double min;
+    private Double max;
+    private Long count;
+    
+<span class="nc" id="L15">    public AggregateStats() {</span>
+<span class="nc" id="L16">    }</span>
+    
+<span class="fc" id="L18">    public AggregateStats(Double average, Double median, Double min, Double max, Long count) {</span>
+<span class="fc" id="L19">        this.average = average;</span>
+<span class="fc" id="L20">        this.median = median;</span>
+<span class="fc" id="L21">        this.min = min;</span>
+<span class="fc" id="L22">        this.max = max;</span>
+<span class="fc" id="L23">        this.count = count;</span>
+<span class="fc" id="L24">    }</span>
+    
+    public Double getAverage() {
+<span class="fc" id="L27">        return average;</span>
+    }
+    
+    public void setAverage(Double average) {
+<span class="nc" id="L31">        this.average = average;</span>
+<span class="nc" id="L32">    }</span>
+    
+    public Double getMedian() {
+<span class="fc" id="L35">        return median;</span>
+    }
+    
+    public void setMedian(Double median) {
+<span class="nc" id="L39">        this.median = median;</span>
+<span class="nc" id="L40">    }</span>
+    
+    public Double getMin() {
+<span class="fc" id="L43">        return min;</span>
+    }
+    
+    public void setMin(Double min) {
+<span class="nc" id="L47">        this.min = min;</span>
+<span class="nc" id="L48">    }</span>
+    
+    public Double getMax() {
+<span class="fc" id="L51">        return max;</span>
+    }
+    
+    public void setMax(Double max) {
+<span class="nc" id="L55">        this.max = max;</span>
+<span class="nc" id="L56">    }</span>
+    
+    public Long getCount() {
+<span class="fc" id="L59">        return count;</span>
+    }
+    
+    public void setCount(Long count) {
+<span class="nc" id="L63">        this.count = count;</span>
+<span class="nc" id="L64">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

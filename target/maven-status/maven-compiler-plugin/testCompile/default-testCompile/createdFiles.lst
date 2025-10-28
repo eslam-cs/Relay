@@ -1,0 +1,5 @@
+com/relay/iot/service/processor/ThermostatProcessorTest.class
+com/relay/iot/security/JwtTokenProviderTest.class
+com/relay/iot/service/ReadingServiceTest.class
+com/relay/iot/controller/ReadingControllerTest.class
+com/relay/iot/service/processor/HeartRateProcessorTest.class
