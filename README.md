@@ -228,113 +228,6 @@ curl http://localhost:8081/api/readings/sensor/THERMO-001 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
----
-
-### Data Ingestion
-
-**POST /api/readings** - Create single reading
-```bash
-curl -X POST http://localhost:8081/api/readings \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "sensorId": "THERMO-001",
-    "deviceType": "THERMOSTAT",
-    "value": 22.5,
-    "timestamp": "2025-10-26T18:00:00Z"
-  }'
-```
-
-**POST /api/readings/batch** - Bulk insert
-```bash
-curl -X POST http://localhost:8081/api/readings/batch \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '[
-    {
-      "sensorId": "THERMO-001",
-      "deviceType": "THERMOSTAT",
-      "value": 22.5,
-      "timestamp": "2025-10-26T18:00:00Z"
-    },
-    {
-      "sensorId": "HEART-001",
-      "deviceType": "HEART_RATE_MONITOR",
-      "value": 75.0,
-      "timestamp": "2025-10-26T18:00:01Z"
-    }
-  ]'
-```
-
-### Data Retrieval
-
-**GET /api/readings** - Get all readings
-```bash
-curl http://localhost:8081/api/readings \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-**GET /api/readings/sensor/{sensorId}** - Get by sensor
-```bash
-curl http://localhost:8081/api/readings/sensor/THERMO-001 \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-**GET /api/readings/range** - Get by time range
-```bash
-curl "http://localhost:8081/api/readings/range?start=2025-10-26T00:00:00Z&end=2025-10-26T23:59:59Z" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-### Device Type Information
-
-**GET /api/device-types** - List all supported device types
-```bash
-curl http://localhost:8081/api/device-types \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-**GET /api/device-types/{deviceType}/validation-rules** - Get validation rules
-```bash
-curl http://localhost:8081/api/device-types/THERMOSTAT/validation-rules \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-Response:
-```json
-{
-  "deviceType": "THERMOSTAT",
-  "minValue": -50.0,
-  "maxValue": 100.0,
-  "description": "Temperature sensor in Celsius"
-}
-```
-
-### Aggregate Statistics
-
-**GET /api/readings/stats/{sensorId}** - Stats for single sensor (uses device-specific processor)
-```bash
-curl "http://localhost:8081/api/readings/stats/THERMO-001?start=2025-10-26T00:00:00Z&end=2025-10-26T23:59:59Z" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-Response:
-```json
-{
-  "average": 22.5,
-  "median": 22.4,
-  "min": 20.1,
-  "max": 24.8,
-  "count": 100
-}
-```
-
-**GET /api/readings/stats/group** - Stats for sensor group
-```bash
-curl "http://localhost:8081/api/readings/stats/group?sensorIds=THERMO-001,HEART-001&start=2025-10-26T18:00:00Z&end=2025-10-26T18:05:00Z" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
 ## Data Model
 
 **Reading**
@@ -416,12 +309,6 @@ The application uses **JWT (JSON Web Tokens)** for stateless authentication.
 - **Swagger/OpenAPI** - API documentation
 - **Maven** - Build tool
 
-## Performance Features
-
-- Batch ingestion endpoint
-- Connection pooling (HikariCP)
-- Database indexes on sensorId and timestamp
-- Transactional batch operations
 
 ## Configuration
 
@@ -575,3 +462,7 @@ src/test/java/com/relay/iot/
 ```bash
 docker exec -it iot-postgres psql -U iot -d iot
 ```
+- \dt - List all tables
+- SELECT * FROM reading; - View all readings
+- \q - Exit the PostgreSQL prompt
+
